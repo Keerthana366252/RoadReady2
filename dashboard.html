@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ROADREADY Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f9ff;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:230px;
+background:#2563eb;
+color:white;
+padding:30px 20px;
+}
+
+.sidebar h2{
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:12px;
+border-radius:6px;
+margin-bottom:10px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.2);
+}
+
+/* MAIN AREA */
+
+.main{
+flex:1;
+padding:30px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:24px;
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.card p{
+font-size:14px;
+color:#64748b;
+margin-bottom:15px;
+}
+
+.card button{
+padding:10px 14px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.card button:hover{
+background:#1d4ed8;
+}
+
+/* PROGRESS */
+
+.progress{
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.bar{
+height:18px;
+background:#e5e7eb;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.fill{
+height:100%;
+background:#2563eb;
+transition:width 0.5s ease;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>🚦 ROADREADY</h2>
+
+<a href="#">Dashboard</a>
+<a href="#">Traffic Lessons</a>
+<a href="#">Road Situations</a>
+<a href="#">Traffic Quiz</a>
+<a href="#">Final Test</a>
+<a href="#">Certificate</a>
+<a href="#">Leaderboard</a>
+<a href="#">Profile</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<div class="header">
+<h1>Welcome to RoadReady 👋</h1>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>📚 Traffic Lessons</h3>
+<p>Learn road rules and safety according to your age group.</p>
+<button type="button" onclick="location.href='lessons.html' ">Start Learning</button>
+</div>
+
+<div class="card">
+<h3>🚗 Road Situations</h3>
+<p>Understand real world traffic scenarios.</p>
+<button type="button" onclick="location.href='situation.html' ">Try Scenario</button>
+</div>
+
+<div class="card">
+<h3>🧠 Traffic Quiz</h3>
+<p>Test your knowledge with interactive quizzes.</p>
+<button type="button" onclick="location.href='quizz.html' ">Take Quiz</button>
+</div>
+
+<div class="card">
+<h3>📝 Final Test</h3>
+<p>Pass the traffic awareness test and earn certificate.</p>
+<button type="button" onclick="location.href='test.html' ">Start Test</button>
+</div>
+
+</div>
+
+<div class="progress">
+
+<h3>Your Learning Progress</h3>
+
+<p>Lessons Completed</p>
+
+<div class="bar">
+<div class="fill" id="progressFill"></div>
+</div>
+
+<p id="progressText">0% Completed</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+let totalModules = 6;
+
+
+let completed = localStorage.getItem("completedModules");
+
+if(completed == null){
+completed = 0;
+}
+if(completed > totalModules){
+completed = totalModules;
+}
+
+
+let percent = (completed / totalModules) * 100;
+
+
+document.getElementById("progressFill").style.width = percent + "%";
+document.getElementById("progressText").innerText = percent + "% Completed";
+
+function logout(){
+window.location.href="start.html";
+}
+
+</script>
+
+</body>
+</html>

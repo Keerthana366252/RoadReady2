@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Traffic Lessons</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f8ff;
+margin:0;
+padding:30px;
+}
+
+h1{
+color:#2563eb;
+}
+
+.lessons{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card button{
+margin-top:10px;
+padding:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>📚 Traffic Safety Lessons</h1>
+
+<div class="lessons">
+
+<div class="card">
+<h3>🚦 Traffic Signals</h3>
+<p>Learn the meaning of red, yellow and green traffic lights.</p>
+<a href="signalLesson.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+<div class="card">
+<h3>🛑 Road Signs</h3>
+<p>Understand warning signs, mandatory signs and information signs.</p>
+<a href="roadsigns.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+<div class="card">
+<h3>🏍 Helmet Safety</h3>
+<p>Why helmets save lives for riders and passengers.</p>
+<a href="helmet.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+<div class="card">
+<h3>🚶 Pedestrian Rules</h3>
+<p>How pedestrians should safely cross roads.</p>
+<a href="pedestrian.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+<div class="card">
+<h3>🚗 Speed Limits</h3>
+<p>Why speed limits exist and how to follow them.</p>
+<a href="speedlimit.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+<div class="card">
+<h3>🚑 Emergency Vehicles</h3>
+<p>How drivers must respond to ambulances and fire trucks.</p>
+<a href="emergency.html"><button onclick="lessonCompleted()">Start Lesson</button></a>
+</div>
+
+</div>
+
+<script>
+function lessonCompleted(){
+
+let completed = localStorage.getItem("completedModules");
+
+if(completed == null){
+completed = 0;
+}
+
+completed++;
+
+localStorage.setItem("completedModules", completed);
+
+}
+</script>
+
+</body>
+</html>

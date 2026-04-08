@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Traffic Final Test</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f8ff;
+padding:30px;
+display:flex;
+justify-content:center;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+width:650px;
+}
+
+h1{
+color:#2563eb;
+margin-bottom:20px;
+}
+
+button{
+display:block;
+width:100%;
+margin-top:10px;
+padding:12px;
+border:none;
+border-radius:6px;
+background:#2563eb;
+color:white;
+font-size:15px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+#result{
+margin-top:20px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📝 Traffic Awareness Final Test</h1>
+
+<p id="question"></p>
+
+<div id="options"></div>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+let current = 0;
+let score = 0;
+
+const test = [
+
+{q:"What should you do at a red traffic light?", options:["Stop","Go","Speed up"], correct:0},
+
+{q:"What does a yellow signal mean?", options:["Stop","Prepare to stop","Ignore"], correct:1},
+
+{q:"What does a green signal mean?", options:["Go if clear","Stop","Reverse"], correct:0},
+
+{q:"Where should pedestrians cross?", options:["Anywhere","Zebra crossing","Middle of road"], correct:1},
+
+{q:"Helmet is required for:", options:["Bike riders","Car drivers","Pedestrians"], correct:0},
+
+{q:"Seatbelt should be worn by:", options:["Driver only","All passengers","No one"], correct:1},
+
+{q:"Using phone while driving is:", options:["Safe","Dangerous","Recommended"], correct:1},
+
+{q:"Speed limits exist for:", options:["Decoration","Safety","Entertainment"], correct:1},
+
+{q:"Emergency vehicles should be:", options:["Blocked","Given priority","Ignored"], correct:1},
+
+{q:"Driving after alcohol is:", options:["Safe","Illegal","Encouraged"], correct:1},
+
+{q:"Before changing lanes you should:", options:["Check mirrors","Close eyes","Speed up"], correct:0},
+
+{q:"Overtaking should happen from:", options:["Left","Right","Anywhere"], correct:1},
+
+{q:"Horn near hospital is:", options:["Allowed","Prohibited","Required"], correct:1},
+
+{q:"A 'No Entry' sign means:", options:["Enter slowly","Do not enter","Speed up"], correct:1},
+
+{q:"When tired while driving you should:", options:["Continue","Take rest","Drive faster"], correct:1},
+
+{q:"School zones require:", options:["High speed","Slow speed","No rules"], correct:1},
+
+{q:"Night driving requires:", options:["Headlights","No lights","Honk"], correct:0},
+
+{q:"Railway crossing without signal requires:", options:["Stop and check","Speed up","Ignore"], correct:0},
+
+{q:"Sharp curve sign means:", options:["Speed up","Slow down","Ignore"], correct:1},
+
+{q:"The safest driving habit is:", options:["Speeding","Following rules","Ignoring signals"], correct:1}
+
+];
+
+function loadQuestion(){
+
+if(current >= test.length){
+
+let percent = (score/test.length)*100;
+
+document.getElementById("question").innerHTML="Test Completed!";
+document.getElementById("options").innerHTML="";
+
+if(percent >= 70){
+
+document.getElementById("result").innerHTML=
+"✅ You Passed! Score: "+score+" / "+test.length;
+
+localStorage.setItem("testScore",score);
+
+setTimeout(()=>{
+window.location.href="certificate.html";
+},2000);
+
+}
+else{
+
+document.getElementById("result").innerHTML=
+"❌ You Failed. Score: "+score+" / "+test.length+" (Need 70% to pass)";
+
+}
+
+return;
+}
+
+const q = test[current];
+
+document.getElementById("question").innerText=(current+1)+". "+q.q;
+
+let buttons="";
+
+q.options.forEach((opt,i)=>{
+
+buttons+=`<button onclick="check(${i})">${opt}</button>`;
+
+});
+
+document.getElementById("options").innerHTML=buttons;
+
+}
+
+function check(choice){
+
+if(choice === test[current].correct){
+score++;
+alert("Correct!");
+}
+else{
+alert("Wrong!");
+}
+
+current++;
+
+loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

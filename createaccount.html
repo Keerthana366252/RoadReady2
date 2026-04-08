@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RoadReady Authentication</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+background:#f4f8ff;
+}
+
+/* LEFT SIDE */
+
+.left{
+flex:1;
+background:linear-gradient(135deg,#38bdf8,#2563eb);
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px;
+text-align:center;
+}
+
+.left h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.left p{
+font-size:18px;
+max-width:380px;
+line-height:1.6;
+}
+
+/* RIGHT SIDE */
+
+.right{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+background:white;
+}
+
+.auth-box{
+width:380px;
+}
+
+.logo{
+font-size:26px;
+font-weight:600;
+color:#2563eb;
+margin-bottom:25px;
+}
+
+/* TABS */
+
+.tabs{
+display:flex;
+border-bottom:1px solid #e5e7eb;
+margin-bottom:25px;
+}
+
+.tabs button{
+flex:1;
+padding:12px;
+background:none;
+border:none;
+cursor:pointer;
+font-size:15px;
+}
+
+.tabs .active{
+border-bottom:3px solid #2563eb;
+font-weight:600;
+}
+
+/* FORM */
+
+form{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+label{
+font-size:13px;
+color:#475569;
+}
+
+input{
+padding:11px;
+border-radius:8px;
+border:1px solid #d1d5db;
+font-size:14px;
+}
+
+input:focus{
+outline:none;
+border-color:#2563eb;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+color:#64748b;
+}
+
+button.submit{
+margin-top:10px;
+padding:12px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+}
+
+button.submit:hover{
+background:#1d4ed8;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LEFT PANEL -->
+
+<div class="left">
+
+<h1>🚦 ROADREADY</h1>
+
+<p>
+Your smart companion for responsible driving.  
+Learn traffic rules, test your knowledge, and become a safer road user.
+</p>
+
+</div>
+
+
+<!-- RIGHT PANEL -->
+
+<div class="right">
+
+<div class="auth-box">
+
+<div class="logo">Welcome</div>
+
+<div class="tabs">
+<button id="loginTab" class="active" onclick="showLogin()">Login</button>
+<button id="signupTab" onclick="showSignup()">Sign Up</button>
+</div>
+
+
+<!-- LOGIN FORM -->
+
+<form id="loginForm">
+
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="Enter your email" required>
+
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Enter password" required>
+
+<div class="row">
+<label><input type="checkbox"> Remember me</label>
+<a href="#">Forgot password?</a>
+</div>
+
+<button type="submit" class="submit">Login</button>
+
+</form>
+
+
+<!-- SIGNUP FORM -->
+
+<form id="signupForm" class="hidden">
+
+<label>Full Name</label>
+<input id="signupName" type="text" placeholder="Enter your name" required>
+
+<label>Email</label>
+<input id="signupEmail" type="email" placeholder="Enter your email" required>
+
+<label>Password</label>
+<input id="signupPassword" type="password" placeholder="Create password" required>
+
+<button type="submit" class="submit">Create Account</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* SWITCH FORMS */
+
+function showLogin(){
+document.getElementById("loginForm").classList.remove("hidden");
+document.getElementById("signupForm").classList.add("hidden");
+
+document.getElementById("loginTab").classList.add("active");
+document.getElementById("signupTab").classList.remove("active");
+}
+
+function showSignup(){
+document.getElementById("signupForm").classList.remove("hidden");
+document.getElementById("loginForm").classList.add("hidden");
+
+document.getElementById("signupTab").classList.add("active");
+document.getElementById("loginTab").classList.remove("active");
+}
+
+
+/* SIGNUP */
+
+document.getElementById("signupForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name = document.getElementById("signupName").value;
+const email = document.getElementById("signupEmail").value;
+const password = document.getElementById("signupPassword").value;
+
+localStorage.setItem("userName",name);
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPassword",password);
+
+alert("Account created successfully! Please login.");
+
+showLogin();
+
+});
+
+
+/* LOGIN */
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const email = document.getElementById("loginEmail").value;
+const password = document.getElementById("loginPassword").value;
+
+const storedEmail = localStorage.getItem("userEmail");
+const storedPassword = localStorage.getItem("userPassword");
+
+if(email === storedEmail && password === storedPassword){
+
+window.location.href = "dashboard.html";
+
+}
+else{
+
+alert("Invalid email or password");
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

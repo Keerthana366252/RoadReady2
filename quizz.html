@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Traffic Quiz</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f8ff;
+padding:30px;
+display:flex;
+justify-content:center;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+width:600px;
+}
+
+h1{
+color:#2563eb;
+margin-bottom:20px;
+}
+
+button{
+display:block;
+width:100%;
+margin-top:10px;
+padding:12px;
+border:none;
+border-radius:6px;
+background:#2563eb;
+color:white;
+font-size:15px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+#score{
+margin-top:20px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🧠 Traffic Rules Quiz</h1>
+
+<p id="question"></p>
+
+<div id="options"></div>
+
+<p id="score"></p>
+
+</div>
+
+<script>
+
+let current = 0;
+let score = 0;
+
+const quiz = [
+
+{
+q:"What does a red traffic light mean?",
+options:["Go","Stop","Slow down"],
+correct:1
+},
+
+{
+q:"What should you do at a zebra crossing?",
+options:["Speed up","Stop for pedestrians","Ignore"],
+correct:1
+},
+
+{
+q:"What does a yellow traffic signal indicate?",
+options:["Speed up","Prepare to stop","Ignore"],
+correct:1
+},
+
+{
+q:"Why should you wear a helmet?",
+options:["For style","For safety","No reason"],
+correct:1
+},
+
+{
+q:"Seatbelt is important because:",
+options:["Avoid fine","Safety during accidents","Decoration"],
+correct:1
+},
+
+{
+q:"What does a 'No Entry' sign mean?",
+options:["Do not enter","Enter slowly","Ignore"],
+correct:0
+},
+
+{
+q:"What should you do before changing lanes?",
+options:["Check mirrors","Close eyes","Speed up"],
+correct:0
+},
+
+{
+q:"Mobile phone while driving is:",
+options:["Safe","Dangerous","Required"],
+correct:1
+},
+
+{
+q:"Speed limit signs indicate:",
+options:["Maximum speed","Minimum speed","Parking"],
+correct:0
+},
+
+{
+q:"Pedestrians should cross at:",
+options:["Anywhere","Zebra crossing","Middle of road"],
+correct:1
+},
+
+{
+q:"Driving under alcohol is:",
+options:["Safe","Illegal and dangerous","Recommended"],
+correct:1
+},
+
+{
+q:"Traffic police hand signal means:",
+options:["Ignore","Follow instructions","Speed up"],
+correct:1
+},
+
+{
+q:"Before starting vehicle you should:",
+options:["Check mirrors","Drive immediately","Close eyes"],
+correct:0
+},
+
+{
+q:"Using horn near hospitals is:",
+options:["Allowed","Prohibited","Required"],
+correct:1
+},
+
+{
+q:"Helmet should be worn by:",
+options:["Only driver","Driver and pillion","Nobody"],
+correct:1
+},
+
+{
+q:"Green traffic signal means:",
+options:["Go if road is clear","Stop","Turn off engine"],
+correct:0
+},
+
+{
+q:"Overtaking should be done from:",
+options:["Left","Right","Anywhere"],
+correct:1
+},
+
+{
+q:"If road is slippery you should:",
+options:["Drive faster","Slow down","Ignore"],
+correct:1
+},
+
+{
+q:"Emergency vehicles should be:",
+options:["Blocked","Given priority","Ignored"],
+correct:1
+},
+
+{
+q:"What is the safest driving habit?",
+options:["Speeding","Following traffic rules","Ignoring signals"],
+correct:1
+}
+
+];
+
+function loadQuestion(){
+
+if(current >= quiz.length){
+
+document.getElementById("question").innerHTML="🎉 Quiz Completed!";
+document.getElementById("options").innerHTML="";
+document.getElementById("score").innerHTML="Your Score: "+score+" / "+quiz.length;
+
+localStorage.setItem("quizScore",score);
+
+return;
+}
+
+const q = quiz[current];
+
+document.getElementById("question").innerText=(current+1)+". "+q.q;
+
+let buttons="";
+
+q.options.forEach((opt,i)=>{
+
+buttons+=`<button onclick="check(${i})">${opt}</button>`;
+
+});
+
+document.getElementById("options").innerHTML=buttons;
+
+}
+
+function check(choice){
+
+if(choice === quiz[current].correct){
+score++;
+alert("✅ Correct!");
+}
+else{
+alert("❌ Wrong answer.");
+}
+
+current++;
+
+loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
